@@ -2,14 +2,9 @@ package transport;
 
 import java.time.LocalDate;
 
-public class Car {
+public class Car extends Transport{
 
-    private String brand;
-    private String model;
     private double engineVolume;
-    private String color;
-    private int year;
-    private String country;
     String transmission;
     private String typeBody;
     String registratonNumber;
@@ -21,36 +16,13 @@ public class Car {
 
 
 
-    public Car(String brand, String model, double engineVolume, String color, int year, String country, String transmission, String typeBody, String tire, String registratonNumber, int numbersOfSeats, Key key, Insurance insurance){
-        this.brand = brand;
-        if (this.brand == null || this.brand == ""){
-            this.brand = "default";
-        }
-
-        this.model = model;
-        if (this.model == null || this.model == ""){
-            this.model = "default";
-        }
-
+    public Car(String brand, String model, double engineVolume, String color, int year, String country, String transmission, String typeBody, String tire, String registratonNumber, int numbersOfSeats, Key key, Insurance insurance, String maxKm){
+        super(brand, model, year, country, color, maxKm);
         this.engineVolume = engineVolume;
         if (this.engineVolume <= 0){
             this.engineVolume = 1.5;
         }
 
-        this.color = color;
-        if (this.color == null || this.color == ""){
-            this.color = "белый";
-        }
-
-        this.year = year;
-        if (this.year <= 0){
-            this.year = 2000;
-        }
-
-        this.country = country;
-        if (this.country == null || this.country == ""){
-            this.country = "default";
-        }
         this.transmission = transmission;
         if (this.transmission == null || this.transmission == ""){
             this.transmission = "default";
@@ -91,6 +63,7 @@ public class Car {
     public String getTypeBody() {
         return typeBody;
     }
+
 
     public int getNumbersOfSeats() {
         return numbersOfSeats;
@@ -224,9 +197,14 @@ public class Car {
         }
     }
 
-
-    public String toString(){
-        return "Марка " + brand + ". Модель: " + model + ". Объём двигателя - " + engineVolume + ", цвет - " + color + ", год выпуска - " + year + ", страна сборки - " + country + ", коробка передач - " + transmission + ", тип кузова - " + typeBody + ", рег.номер - " + registratonNumber + ", количество мест " + numbersOfSeats + ", резина - " + tire + ", срок действия страховки - " + getInsurance().getNumber() + ",  стоимосить - " + getInsurance().getCost() + ", срок - "+ getInsurance().getExpireDate();
+    @Override
+    public void refill() {
+        System.out.println("Машину можешь заправить бензином, дизелем заряжать на специальных электропарковках, если это электрокар");
     }
+    public String toString(){
+        return "Марка " + getBrand() + ". Модель: " + getModel() + ". Объём двигателя - " + engineVolume + ", цвет - " + getColor() + ", год выпуска - " + getYear() + ", страна сборки - "
+                + getCountry() + ", коробка передач - " + transmission + ", тип кузова - " + typeBody + ", рег.номер - " + registratonNumber + ", количество мест " + numbersOfSeats
+                + ", резина - " + tire + ", срок действия страховки - " + getInsurance().getNumber() + ",  стоимосить - " + getInsurance().getCost() + ", срок - "
+                + getInsurance().getExpireDate(); }
 
 }
